@@ -8,17 +8,16 @@ struct node
 };
 
 *head = NULL ; 
-
+void gen() ; 
 void insert_first(int val) ; 
 void insert_last(int val) ; 
-void insert_position(int val , int position) ; 
+void delete_first() ; 
+void delete_choose(int *head ,int val) ; 
 void display() ;
-
 int main(){  
     int val ;
     int choice ; 
-    int position ; 
-
+    gen() ; 
     while(1){
         printf("\nChoice : ") ; 
         scanf("%d",&choice) ; 
@@ -36,21 +35,38 @@ int main(){
             display() ; 
             break ; 
         case 3: 
-            printf("What position do you want to insert : ") ; 
-            scanf("%d",&position) ; 
-            printf("Number : ") ; 
-            scanf("%d",&val) ; 
-            insert_position(val,position) ; 
-            display() ; 
-            break ; 
-        case 4: 
             exit(0) ; 
+        case 4: 
+            delete_first(); 
+            display();
+            break ;
+        case 5:
+            printf("What number do you want to delete : ") ; 
+            scanf("%d",&val) ; 
+            delete_choose(head,val) ; 
             break ; 
         default:
             printf("Not Found") ; 
             break;
         } 
     }
+}
+void gen(){
+    struct node *one ;
+    struct node *two ;
+    struct node *three ;
+ 
+    one = malloc(sizeof(struct node)) ;
+    two = malloc(sizeof(struct node)) ;
+    three = malloc(sizeof(struct node)) ;
+    one -> data = 4 ; 
+    two -> data = 8 ;
+    three -> data = 1 ; 
+    one -> next = two ; 
+    two -> next = three ; 
+    three ->  next = NULL ; 
+    head = one ; 
+
 }
 
 void insert_first(int val){
@@ -78,22 +94,29 @@ void insert_last(int val){
     temp -> next = newnode ; 
     
     }
+
 }
 
-void insert_position(int val , int position){
-    struct node *newnode ; 
-    struct node *temp = head ; 
-    newnode = malloc(sizeof(struct node)) ; 
-    newnode -> data = val ; 
-    for (int i = 1 ; i < position ; i ++){
-        if (temp -> next != NULL){
-            temp = temp -> next ; 
+void delete_first(){
+    struct node *temp ; 
+    temp = head ; 
+    temp = temp -> next ; 
+    head = temp ; 
+}
+
+void delete_choose(int *head ,int val){
+    struct node *temp ; 
+    while(temp != NULL){
+        if (temp -> data == val){
+            temp = temp -> next ;
+        }
+        else {
+            delete_choose(temp->next , val) ; 
         }
     }
-    newnode -> next = temp -> next ;
-    temp -> next = newnode ;  
-
+    
 }
+
 void display(){
     struct node *temp = head ; 
     while(temp != NULL){
