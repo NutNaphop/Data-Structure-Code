@@ -56,7 +56,7 @@ void push(int value){
 
 void pop(){
     if (top == -1){
-        printf("\nStack is Empty!!!\n\n") ;
+        printf("\nStack is Empty!! !\n\n") ;
     }
     else{
         printf("\nDeleted : %d",stack[top]) ; 

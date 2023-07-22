@@ -12,14 +12,18 @@ void gen() ;
 void insert_first(int val) ; 
 void insert_last(int val) ; 
 void delete_first() ; 
+void delete_last() ; 
 void delete_choose(int *head ,int val) ; 
+void search(int val) ; 
+
 void display() ;
 int main(){  
     int val ;
     int choice ; 
     gen() ; 
     while(1){
-        printf("\nChoice : ") ; 
+        printf("\n\nMenu :\n1.Insert_First\n2.Insert Last\n3.exit\n4.Delete First\n5.Delete Choose\n6.Delete Last\n7.Search\n8.Display\nWhat do you want : ") ;
+
         scanf("%d",&choice) ; 
         switch (choice){
         case 1:
@@ -44,6 +48,19 @@ int main(){
             printf("What number do you want to delete : ") ; 
             scanf("%d",&val) ; 
             delete_choose(head,val) ; 
+            break ; 
+        case 6 :
+            delete_last() ; 
+            display() ; 
+            break; 
+        case 7: 
+            printf("What number do you want to find : ") ; 
+            scanf("%d",&val) ; 
+            search(val) ; 
+            display() ; 
+            break ; 
+        case 8:
+            display() ; 
             break ; 
         default:
             printf("Not Found") ; 
@@ -115,6 +132,43 @@ void delete_choose(int *head ,int val){
         }
     }
     
+}
+
+void delete_last(){
+    struct node *temp ; 
+    struct node *prev ; 
+
+    temp = head ;     
+    prev = head ; 
+    temp = temp -> next ; 
+
+    while (temp -> next != NULL){
+        temp = temp -> next ; 
+        prev = prev -> next ; 
+    }
+    prev -> next = NULL ; 
+    prev = head ; 
+}
+
+void search(int val) {
+    struct node *temp = head ;
+ 
+    if (temp -> data == val) {
+        printf("Found it ! ! !") ; 
+    }
+    
+    else if (temp != NULL){
+        while (temp != NULL){
+            if (temp -> data == val){
+                printf("Found it ! ! !\n") ; 
+                break ; 
+            }
+            else{
+                temp = temp -> next ; 
+            }
+        }
+    }
+
 }
 
 void display(){
