@@ -121,18 +121,20 @@ void delete_first(){
     head = temp ; 
 }
 
-void delete_choose(int *head ,int val){
-    struct node *temp ; 
-    while(temp != NULL){
-        if (temp -> data == val){
-            temp = temp -> next ;
-        }
-        else {
-            delete_choose(temp->next , val) ; 
-        }
-    }
+// void delete_choose(int *head ,int val){
+//     struct node *temp ; 
+//     while(temp != NULL){
+//         if (temp -> data == val){
+//             temp = temp -> next ;
+//             display() ; 
+//             break ; 
+//         }
+//         else {
+//             delete_choose(temp->next , val) ; 
+//         }
+//     }
     
-}
+// }
 
 void delete_last(){
     struct node *temp ; 
